@@ -3,6 +3,7 @@ from RMPY.rig import rigSingleJoint
 import pymel.core as pm
 
 def build():
+    # creating main joints of bike and wheels
     rig_world = rigWorld.RigWorld()
     cog = rigSingleJoint.RigSingleJoint()
     cog.create_point_base('C_COG_reference_pnt', centered=True)
@@ -25,6 +26,7 @@ def build():
     pedals_wheel_rig = rigSingleJoint.RigSingleJoint()
     pedals_wheel_rig.create_point_base('C_pedalWheel_reference_pnt', type='circular')
     pedals_wheel_rig.set_parent(cog)
+
     # then we create both pedals
     l_pedal_rig = rigSingleJoint.RigSingleJoint()
     l_pedal_rig.create_point_base('L_pedal_reference_pnt', centered=True)
@@ -32,10 +34,12 @@ def build():
     r_pedal_rig = rigSingleJoint.RigSingleJoint()
     r_pedal_rig.create_point_base('R_pedal_reference_pnt', centered=True)
     r_pedal_rig.set_parent(pedals_wheel_rig)
+
     # The thing with the pedals is that in position they should follow the pedal wheel,
     # but in orientation they should follow the cog
     # we create an offset group on the left pedal.
     l_offset_group = l_pedal_rig.create.group.point_base(l_pedal_rig.controls[0], name='offset')
+
     # we orient Constraint this offset group with the cog
     pm.orientConstraint(cog.tip, l_offset_group, mo=True)
 
