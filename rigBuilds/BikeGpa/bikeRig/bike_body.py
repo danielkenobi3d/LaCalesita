@@ -24,15 +24,15 @@ def build():
     # creating the pedals
     # you will need a main control for both pedals that will rotate on the center.
     pedals_wheel_rig = rigSingleJoint.RigSingleJoint()
-    pedals_wheel_rig.create_point_base('C_pedalWheel_reference_pnt', type='circular')
+    pedals_wheel_rig.create_point_base('C_mainStar_reference_pnt', type='circular')
     pedals_wheel_rig.set_parent(cog)
 
     # then we create both pedals
     l_pedal_rig = rigSingleJoint.RigSingleJoint()
-    l_pedal_rig.create_point_base('L_pedal_reference_pnt', centered=True)
+    l_pedal_rig.create_point_base('L_pedal00_reference_pnt', centered=True)
     l_pedal_rig.set_parent(pedals_wheel_rig)
     r_pedal_rig = rigSingleJoint.RigSingleJoint()
-    r_pedal_rig.create_point_base('R_pedal_reference_pnt', centered=True)
+    r_pedal_rig.create_point_base('R_pedal00_reference_pnt', centered=True)
     r_pedal_rig.set_parent(pedals_wheel_rig)
 
     # The thing with the pedals is that in position they should follow the pedal wheel,

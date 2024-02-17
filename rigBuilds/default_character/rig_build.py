@@ -3,6 +3,7 @@ from bgb_short.pipeline.mgear import io
 from RMPY.core import data_save_load
 from RMPY.core import search_hierarchy
 import pymel.core as pm
+from RMPY.core import controls
 import importlib
 from pathlib import Path
 from bgb_short.rigBuilds.default_character import rig_facial
@@ -46,14 +47,22 @@ def load_skinning_data():
 
 def load_shapes_data():
     env = environment.Environment()
-    controls = pm.ls('*_ctl')
-    for each in controls:
+    scene_controls = pm.ls('*_ctr')
+    for each in scene_controls:
         if Path(f'{env.data}/nurbsCurves/{each}.json').exists():
-            data_save_load.load_curves(*controls)
-
+            data_save_load.load_curves(*scene_controls)
+    controls.color_now_all_ctrls()
 
 def cleanup():
-    pass
+    delete_objects = []
+    for each in pm.ls('|*'):
+        if each.name() != 'rig':
+            if each.getShape():
+                if pm.objectType(each.getShape()) != 'camera':
+                    delete_objects.append(each)
+            else:
+                delete_objects.append(each)
+    pm.delete(delete_objects)
 
 
 def custom_finalize():
