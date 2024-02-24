@@ -9,4 +9,4 @@ rope = rigLaces.RigLaces()
 rope.create_point_base(*rope_root.getChildren())
 
 joints_on_curve_rig = rigSplineIK.RigSplineIK()
-joints_on_curve_rig.create_curve_base(rope.curve, number_of_joints=50)
+joints_on_curve_rig.create_curve_base(rope.curve, stretchy_ik=False, number_of_joints=50)
