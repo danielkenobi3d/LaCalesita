@@ -19,7 +19,7 @@ def build():
     seat_rig.set_parent(cog)
     cog.set_parent(rig_world)
     front_wheel_rig.set_parent(handle_bar_rig)
-    back_wheel_rig.set_parent(seat_rig)
+    back_wheel_rig.set_parent(cog)
 
     # creating the pedals
     # you will need a main control for both pedals that will rotate on the center.

@@ -37,7 +37,7 @@ def custom_rig():
 
 def load_skinning_data():
     env = environment.Environment()
-    root_node = pm.ls('*_GEO_GRP')[0]
+    root_node = pm.ls('*_GEO_GRP','GrandPa_grp')[0]
     print(root_node)
     list_of_objects = search_hierarchy.shape_type_in_hierarchy(root_node)
     for each in list_of_objects:
@@ -47,7 +47,7 @@ def load_skinning_data():
 
 def load_shapes_data():
     env = environment.Environment()
-    scene_controls = pm.ls('*_ctr')
+    scene_controls = pm.ls('*_ctr', '*_ctl')
     for each in scene_controls:
         if Path(f'{env.data}/nurbsCurves/{each}.json').exists():
             data_save_load.load_curves(*scene_controls)

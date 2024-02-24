@@ -7,7 +7,7 @@ from RMPY.rig import rigBlendShapeControls
 
 
 def custom_rig():
-    pass
+    pm.parent('GrandPa_grp', 'rig')
 
 
 def custom_finalize():
