@@ -1,4 +1,4 @@
-from LaCalesita.rigBuilds.BikeLeft.bikeRig import bike_right_body
+from LaCalesita.rigBuilds.BikeRight.bikeRig import bike_right_body
 from bgb_short.pipeline import environment
 from RMPY.core import data_save_load
 from RMPY.core import search_hierarchy
