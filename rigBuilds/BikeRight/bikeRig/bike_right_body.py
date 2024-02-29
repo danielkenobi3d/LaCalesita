@@ -10,18 +10,21 @@ def build():
     handle_bar_rig = rigSingleJoint.RigSingleJoint()
     handle_bar_rig.create_point_base('C_handleBar_reference_pnt')
     front_wheel_rig = rigSingleJoint.RigSingleJoint()
-    front_wheel_rig.create_point_base('C_frontWheel_reference_pnt')
-    back_wheel_rig = rigSingleJoint.RigSingleJoint()
-    back_wheel_rig.create_point_base('C_backWheel_reference_pnt')
+    front_wheel_rig.create_point_base('C_mainStar_FrontWheel_reference_pnt')
+    r_miniwheel_rig = rigSingleJoint.RigSingleJoint()
+    r_miniwheel_rig.create_point_base('R_miniWheel_reference_pnt')
+    l_miniwheel_rig = rigSingleJoint.RigSingleJoint()
+    l_miniwheel_rig.create_point_base('L_miniWheel_reference_pnt')
     handle_bar_rig.set_parent(cog)
     cog.set_parent(rig_world)
     front_wheel_rig.set_parent(handle_bar_rig)
-    back_wheel_rig.set_parent(cog)
+    r_miniwheel_rig.set_parent(cog)
+    l_miniwheel_rig.set_parent(cog)
 
     # creating the pedals
     # you will need a main control for both pedals that will rotate on the center.
     pedals_wheel_rig = rigSingleJoint.RigSingleJoint()
-    pedals_wheel_rig.create_point_base('C_mainStar_reference_pnt', type='circular')
+    pedals_wheel_rig.create_point_base('C_mainStar_FrontWheel_reference_pnt', type='circular')
     pedals_wheel_rig.set_parent(cog)
 
     # then we create both pedals

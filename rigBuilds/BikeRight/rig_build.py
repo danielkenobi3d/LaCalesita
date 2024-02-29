@@ -8,12 +8,12 @@ from pathlib import Path
 importlib.reload(bike_right_body)
 def custom_rig():
     bike_right_body.build()
-    pm.parent('ChildA_Bike_LP', 'rig')
+    pm.parent('ChildB_Bike_LP', 'rig')
 
 
 def load_skinning_data():
     env = environment.Environment()
-    root_node = pm.ls('ChildA_Bike_LP')[0]
+    root_node = pm.ls('ChildB_Bike_LP')[0]
     print(root_node)
     list_of_objects = search_hierarchy.shape_type_in_hierarchy(root_node)
     for each in list_of_objects:
