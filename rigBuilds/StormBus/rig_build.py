@@ -1,4 +1,4 @@
-from LaCalesita.rigBuilds.Storm_bus import bus_body
+from LaCalesita.rigBuilds.StormBus.StormBusRig import bus_body
 from bgb_short.pipeline import environment
 from RMPY.core import data_save_load
 from RMPY.core import search_hierarchy
@@ -20,3 +20,4 @@ def load_skinning_data():
     for each in list_of_objects:
         if Path(f'{env.data}/skinClusters/{each}.json').exists():
             data_save_load.load_skin_cluster(each)
+

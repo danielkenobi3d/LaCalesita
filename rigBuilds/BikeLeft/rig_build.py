@@ -20,5 +20,3 @@ def load_skinning_data():
         if Path(f'{env.data}/skinClusters/{each}.json').exists():
             data_save_load.load_skin_cluster(each)
 
-def cleanup ():
-        pass
