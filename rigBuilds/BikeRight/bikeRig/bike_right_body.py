@@ -9,15 +9,13 @@ def build():
     cog.create_point_base('C_COG_reference_pnt', centered=True)
     handle_bar_rig = rigSingleJoint.RigSingleJoint()
     handle_bar_rig.create_point_base('C_handleBar_reference_pnt')
-    front_wheel_rig = rigSingleJoint.RigSingleJoint()
-    front_wheel_rig.create_point_base('C_mainStar_FrontWheel_reference_pnt')
+
     r_miniwheel_rig = rigSingleJoint.RigSingleJoint()
     r_miniwheel_rig.create_point_base('R_miniWheel_reference_pnt')
     l_miniwheel_rig = rigSingleJoint.RigSingleJoint()
     l_miniwheel_rig.create_point_base('L_miniWheel_reference_pnt')
     handle_bar_rig.set_parent(cog)
     cog.set_parent(rig_world)
-    front_wheel_rig.set_parent(handle_bar_rig)
     r_miniwheel_rig.set_parent(cog)
     l_miniwheel_rig.set_parent(cog)
 
@@ -25,7 +23,7 @@ def build():
     # you will need a main control for both pedals that will rotate on the center.
     pedals_wheel_rig = rigSingleJoint.RigSingleJoint()
     pedals_wheel_rig.create_point_base('C_mainStar_FrontWheel_reference_pnt', type='circular')
-    pedals_wheel_rig.set_parent(cog)
+    pedals_wheel_rig.set_parent(handle_bar_rig)
 
     # then we create both pedals
     l_pedal_rig = rigSingleJoint.RigSingleJoint()
@@ -41,13 +39,13 @@ def build():
     l_offset_group = l_pedal_rig.create.group.point_base(l_pedal_rig.controls[0], name='offset')
 
     # we orient Constraint this offset group with the cog
-    pm.orientConstraint(cog.tip, l_offset_group, mo=True)
+    pm.orientConstraint(handle_bar_rig.tip, l_offset_group, mo=True)
 
     # and we do the same for the right pedal
     # we create an offset group for the pedal.
     r_offset_group = r_pedal_rig.create.group.point_base(r_pedal_rig.controls[0], name='offset')
     # we orient Constraint this offset group with the cog
-    pm.orientConstraint(cog.tip, r_offset_group, mo=True)
+    pm.orientConstraint(handle_bar_rig.tip, r_offset_group, mo=True)
 
 
 if __name__ == '__main__':
