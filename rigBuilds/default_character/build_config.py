@@ -10,8 +10,10 @@ build = {
         ('custom rig', ['rig_build.custom_rig'])
         ],
     'load data': [
+        ('load constraints', ['rig_constraints.create_constraints']),
         ('load skinning', ['rig_build.load_skinning_data']),
         ('load shapes', ['rig_build.load_shapes_data'])
+
     ],
     'finalize': [
         ('cleanup', ['rig_build.cleanup']),
