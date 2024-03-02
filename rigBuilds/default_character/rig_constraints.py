@@ -3,7 +3,16 @@ from bgb_short.pipeline import environment
 import importlib
 
 def matrix_constraint(parent, child):
-    pass
+    parent = pm.ls(parent)[0]
+    child = pm.ls(child)[0]
+    if child.getParent():
+        mult_matrix = pm.createNode('multMatrix')
+        parent.worldMatrix[0] >> mult_matrix.matrixIn[0]
+        child.getParent().worldInverseMatrix[0]>> mult_matrix.matrixIn[1]
+        mult_matrix.matrixSum >> child.offsetParentMatrix
+    else:
+        parent.worldMatrix[0] >> child.offsetParentMatrix
+
 
 def create_constraints():
     env = environment.Environment()
@@ -23,3 +32,7 @@ def create_constraints():
                 for each_child in geo_definition.constraints[each][each_parent]:
                     for each_function in constraint_functions[each]:
                         each_function(each_parent, each_child, mo=True)
+
+if __name__ == '__main__':
+    selection = pm.ls(selection=True)
+    matrix_constraint(*selection)
