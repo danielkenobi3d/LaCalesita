@@ -47,13 +47,17 @@ def load_skinning_data():
 
 def load_shapes_data():
     env = environment.Environment()
-    scene_controls = pm.ls('*_ctr', '*_ctl')
+    scene_controls = pm.ls('*_ctr', '*_ctl', type='transform')
     for each in scene_controls:
         if Path(f'{env.data}/nurbsCurves/{each}.json').exists():
-            data_save_load.load_curves(*scene_controls)
+            try:
+                data_save_load.load_curves(each)
+            except:
+                print(f'an error ocurred loading {each}')
     controls.color_now_all_ctrls()
 
 def cleanup():
+    pm.parent('environment', 'rig')
     delete_objects = []
     for each in pm.ls('|*'):
         if each.name() != 'rig':
@@ -63,6 +67,8 @@ def cleanup():
             else:
                 delete_objects.append(each)
     pm.delete(delete_objects)
+    for each in pm.ls('*_settings*_pnt'):
+        each.visibility.set(False)
 
 
 def custom_finalize():
