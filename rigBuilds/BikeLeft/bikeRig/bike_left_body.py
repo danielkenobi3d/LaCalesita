@@ -1,5 +1,6 @@
 from RMPY.rig import rigWorld
 from RMPY.rig import rigSingleJoint
+from RMPY.rig import rigWheel
 import pymel.core as pm
 
 def build():
@@ -9,10 +10,22 @@ def build():
     cog.create_point_base('C_COG_reference_pnt', centered=True)
     handle_bar_rig = rigSingleJoint.RigSingleJoint()
     handle_bar_rig.create_point_base('C_handleBar_reference_pnt')
+
     front_wheel_rig = rigSingleJoint.RigSingleJoint()
     front_wheel_rig.create_point_base('C_frontWheel_reference_pnt')
+    front_wheel_rotation_rig = rigWheel.RigWheel(rig_system=front_wheel_rig.rig_system)
+    front_wheel_rotation_rig.create_point_base('C_frontWheel_reference_pnt')
+    front_wheel_rotation_rig.set_parent(front_wheel_rig)
+    front_wheel_rotation_rig.rig_system.settings.radius.set(10)
+
     back_wheel_rig = rigSingleJoint.RigSingleJoint()
     back_wheel_rig.create_point_base('C_backWheel_reference_pnt')
+
+    back_wheel_rotation_rig = rigWheel.RigWheel(rig_system=back_wheel_rig.rig_system)
+    back_wheel_rotation_rig.create_point_base('C_backWheel_reference_pnt')
+    back_wheel_rotation_rig.set_parent(back_wheel_rig)
+    back_wheel_rotation_rig.rig_system.settings.radius.set(10)
+
     handle_bar_rig.set_parent(cog)
     cog.set_parent(rig_world)
     front_wheel_rig.set_parent(handle_bar_rig)
